@@ -1,0 +1,33 @@
+<% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
+    <div class="ui warning message">
+        <i class="close icon"></i>
+        <div class="header">
+            User registration unsuccessful
+        </div>
+        <%= error.msg %>
+    </div>
+<% }); %> <% } %> <% if(success_msg != ''){ %>
+<div class="ui success message">
+    <i class="close icon"></i>
+    <div class="header">
+        Your user registration was successful.
+    </div>
+    <%= success_msg %>
+</div>
+<% } %> <% if(error_msg != ''){ %>
+<div class="ui warning message">
+    <i class="close icon"></i>
+    <div class="header">
+        
+    </div>
+    <%= error_msg %>
+</div>
+<% } %> <% if(error != ''){ %>
+<div class="ui warning message">
+    <i class="close icon"></i>
+    <div class="header">
+        
+    </div>
+    <%= error %>
+</div>
+<% } %>
