@@ -1,10 +1,17 @@
 {
-  "devDependencies": {
-    "nodemon": "^3.1.4"
+  "name": "twilio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "connect-flash": "^0.1.1",
     "express": "^4.21.0",
     "express-session": "^1.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }
