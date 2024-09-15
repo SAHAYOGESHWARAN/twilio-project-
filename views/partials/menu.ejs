@@ -1,0 +1,27 @@
+<div class="ui secondary  menu">
+    <a class="active item" href="/">
+        Home
+    </a>
+    <% if(locals.user) { %>
+        <a class="ui item" href="/users/dashboard">
+        dashboard
+        </a>
+        <div class="right menu">
+        <a class='ui item'>
+            <%= user.username %>
+        </a>
+        <a class="ui item" href="/users/logout">
+            Logout
+        </a>
+        </div>
+    <% } else {%>
+        <div class="right menu">
+        <a class="ui item" href="/users/signup">
+            Sign Up
+        </a>
+        <a class="ui item" href="/users/login">
+            Login
+        </a>
+        </div>
+    <% } %>
+    </div>
