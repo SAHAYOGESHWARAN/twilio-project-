@@ -53,3 +53,10 @@ mongoose.connect('mongodb://localhost:27017/authWithTwilio',
         console.log(`connected to mongodb`)
     })
     .catch(e => console.log(e))
+
+    //after requiring connect-flash
+const expressLayouts = require('express-ejs-layouts')
+
+//after the mongoose.connect logic
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
