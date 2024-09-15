@@ -1,0 +1,20 @@
+
+
+<div class="ui very padded text container segment">
+  <%- include ('./partials/message') %>
+  <h3>
+      Login Form
+  </h3>
+  
+  <form class="ui form" action="/users/login" method="POST">
+    <div class="field">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Email address">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Password">
+    </div>
+    <button class="ui button" type="submit">Login</button>
+  </form>
+</div>

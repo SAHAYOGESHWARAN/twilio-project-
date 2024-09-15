@@ -1,4 +1,7 @@
+
+
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -24,11 +27,6 @@ const userSchema = new mongoose.Schema({
     verified: Boolean
 })
 
-module.exports = mongoose.model('user', userSchema)
-//after requiring mongoose
-const bcrypt = require('bcryptjs')
-
-//before module.exports
 //hash password on save
 userSchema.pre('save', async function() {
     return new Promise( async (resolve, reject) => {
@@ -43,6 +41,7 @@ userSchema.pre('save', async function() {
         });
     })
 })
+
 userSchema.methods.validPassword = async function(password) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(password, this.password, (err, res) => {
@@ -54,3 +53,4 @@ userSchema.methods.validPassword = async function(password) {
     })
 }
 
+module.exports = mongoose.model('user', userSchema)

@@ -1,0 +1,88 @@
+
+
+
+<div class="ui very padded text container segment">
+  <%- include ('./partials/message') %>
+  <h3>
+      Signup Form
+  </h3>
+  
+  <form class="ui form" action="/users/signup" method="POST">
+
+    <div class="field">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="name">
+    </div>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="username">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Password">
+    </div>
+    <div class="field">
+      <label>Phone number</label>
+      <input type="tel" id='phone'>
+      <span id="valid-msg" class="hide success">✓ Valid</span>
+      <span id="error-msg" class="hide error"></span>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Email address">
+    </div>
+    
+    <button class="ui button" type="submit">Sign up</button>
+  </form>
+</div>
+
+<script src="/static/js/intlTelInput.js"></script>
+<script>
+    const input = document.querySelector("#phone")
+    const errorMsg = document.querySelector("#error-msg")
+    const validMsg = document.querySelector("#valid-msg")
+    
+    const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    const iti = window.intlTelInput(input, {
+        separateDialCode: true,
+        autoPlaceholder: "aggressive",
+        hiddenInput: "phonenumber",
+        utilsScript: "/static/js/utils.js?1590403638580" // just for formatting/placeholders etc
+    });
+
+    var reset = function() {
+      input.classList.remove("error");
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("hide");
+      validMsg.classList.add("hide");
+    };
+
+    // on blur: validate
+    input.addEventListener('blur', function() {
+      reset();
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          validMsg.classList.remove("hide");
+
+        } else {
+          input.classList.add("error");
+          
+          var errorCode = iti.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          errorMsg.classList.remove("hide");
+        }
+      }
+    });
+
+    // on keyup / change flag: reset
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+
+    document.querySelector('.ui.form').addEventListener('submit', (e) => {
+      if(!iti.isValidNumber()){
+        e.preventDefault()
+      }
+    })
+</script> 
