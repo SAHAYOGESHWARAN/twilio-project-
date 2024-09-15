@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express');
 const session = require('express-session')
 const flash = require('connect-flash')
+const mongoose = require('mongoose')
 
 const port = process.env.PORT || 3000
 const app = express();
@@ -40,3 +41,15 @@ app.use(function(err, req, res, next) {
 app.listen(port, () => {
     console.log(`app is running on port ${port}`)
 });
+
+
+//connect to mongodb
+mongoose.connect('mongodb://localhost:27017/authWithTwilio', 
+    { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+    })
+    .then(() => {
+        console.log(`connected to mongodb`)
+    })
+    .catch(e => console.log(e))
