@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js"
   },
-  "author": "Godwin Alexander",
+  "author": "saha",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
