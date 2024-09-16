@@ -1,42 +1,37 @@
+const twilio = require('twilio');
 
+// Load environment variables
+require('dotenv').config();
 
-require('dotenv').config()
-const twilio = require('twilio')
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
-
-//create verification service
-const createService = async(req, res) => {
-    client.verify.services.create({ friendlyName: 'phoneVerification' })
-        .then(service => console.log(service.sid))
-}
-
-//send verification code token
-const sendVerification = async(req, res, number) => {
+const sendVerification = async (req, res, phoneNumber) => {
+  try {
+    const verification = await client.verify.services(process.env.TWILIO_SERVICE_SID)
+      .verifications
+      .create({ to: phoneNumber, channel: 'sms' });
     
-        client.verify.services(process.env.TWILIO_VERIFICATION_SID)
-            .verifications
-            .create({to: `${number}`, channel: 'sms'})
-            .then( verification => 
-                console.log(verification.status)
-            ); 
-}
+    return verification;
+  } catch (error) {
+    console.error('Error sending verification:', error);
+    res.status(500).json({ message: 'Failed to send verification code' });
+  }
+};
 
-
-//check verification token
-const checkVerification = async(req, res, number, code) => {
-    return new Promise((resolve, reject) => {
-        client.verify.services(process.env.TWILIO_VERIFICATION_SID)
-            .verificationChecks
-            .create({to: `${number}`, code: `${code}`})
-            .then(verification_check => {
-                resolve(verification_check.status)
-            });
-    })
-
-}
+const checkVerification = async (req, res, phoneNumber, code) => {
+  try {
+    const verificationCheck = await client.verify.services(process.env.TWILIO_SERVICE_SID)
+      .verificationChecks
+      .create({ to: phoneNumber, code: code });
+    
+    return verificationCheck.status;  // 'approved' or 'pending'
+  } catch (error) {
+    console.error('Error checking verification:', error);
+    res.status(500).json({ message: 'Failed to check verification code' });
+  }
+};
 
 module.exports = {
-    sendVerification,
-    checkVerification
-}
+  sendVerification,
+  checkVerification
+};
