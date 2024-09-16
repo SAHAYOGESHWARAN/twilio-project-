@@ -9,13 +9,14 @@ const userRoute = require('./routes/user');
 const { localAuth } = require('./config/passportLogic');
 require('dotenv').config();
 
-const app = express(); // Initialize app first
+const app = express();
+const port = process.env.PORT || 3000;
 
 // Passport local authentication strategy
 localAuth(passport);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, { // Use environment variable for MongoDB URI
+mongoose.connect(process.env.MONGO_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 })
@@ -33,7 +34,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // Session middleware
 app.use(session({ 
-    secret: "please log me in",
+    secret: process.env.SESSION_SECRET || "please log me in",
     resave: false, 
     saveUninitialized: false,
     cookie: { secure: false } // Set to true if HTTPS is used in production
@@ -75,7 +76,6 @@ app.use((err, req, res, next) => {
 });
 
 // Listen on the specified port
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });
