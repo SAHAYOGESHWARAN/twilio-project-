@@ -15,7 +15,7 @@ const app = express();
 localAuth(passport);
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/authWithTwilio', { 
+mongoose.connect('mongodb+srv://sahayogeshwaran1:db4aUSjkZkX1AUNf@cluster1.fpl98.mongodb.net/authWithTwilio', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 })

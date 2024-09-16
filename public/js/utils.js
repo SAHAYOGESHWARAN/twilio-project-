@@ -33,8 +33,6 @@ b:9,type:String},16:{name:"national_prefix_transform_rule",b:9,type:String},18:{
 J.prototype.f=function(){var a=sa;a||(sa=a=B(J,{0:{name:"PhoneNumber",j:"i18n.phonenumbers.PhoneNumber"},1:{name:"country_code",required:!0,b:5,type:Number},2:{name:"national_number",required:!0,b:4,type:Number},3:{name:"extension",b:9,type:String},4:{name:"italian_leading_zero",b:8,type:Boolean},8:{name:"number_of_leading_zeros",b:5,defaultValue:1,type:Number},5:{name:"raw_input",b:9,type:String},6:{name:"country_code_source",b:14,defaultValue:0,type:ta},7:{name:"preferred_domestic_carrier_code",
 b:9,type:String}}));return a};J.ctor=J;J.ctor.f=J.prototype.f;/*
 
- Copyright (C) 2010 The Libphonenumber Authors
-
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
