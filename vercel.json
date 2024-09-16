@@ -1,10 +1,10 @@
 {
     "version": 2,
     "builds": [
-      { "src": "server.js", "use": "@vercel/node" } // Adjust "server.js" to your main server file
+      { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/index.js" } // Adjust "index.js" to your main server file
+      { "src": "/(.*)", "dest": "/index.js" }
     ]
   }
   
