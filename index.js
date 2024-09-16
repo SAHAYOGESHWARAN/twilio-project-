@@ -9,17 +9,13 @@ const userRoute = require('./routes/user');
 const { localAuth } = require('./config/passportLogic');
 require('dotenv').config();
 
-
-app.use(express.static('public'));
-
-const port = process.env.PORT || 3000;
-const app = express();
+const app = express(); // Initialize app first
 
 // Passport local authentication strategy
 localAuth(passport);
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://sahayogeshwaran1:db4aUSjkZkX1AUNf@cluster1.fpl98.mongodb.net/authWithTwilio', { 
+mongoose.connect(process.env.MONGO_URI, { // Use environment variable for MongoDB URI
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 })
@@ -79,6 +75,7 @@ app.use((err, req, res, next) => {
 });
 
 // Listen on the specified port
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });
