@@ -9,6 +9,9 @@ const userRoute = require('./routes/user');
 const { localAuth } = require('./config/passportLogic');
 require('dotenv').config();
 
+
+app.use(express.static('public'));
+
 const port = process.env.PORT || 3000;
 const app = express();
 
